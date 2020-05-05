@@ -15,8 +15,7 @@ public class BlogResponseEntityExceptionHandler extends ResponseEntityExceptionH
   @ExceptionHandler(PostNotFoundException.class)
   protected ResponseEntity<RestErrorMessage> handleConflict(PostNotFoundException ex) {
     String msg = format("can't find post with UID: %s", ex.getUid());
-
-    //    RestErrorMessage msg = RestErrorMessage.builder()
+//    RestErrorMessage msgDto = RestErrorMessage.builder()
 //        .message(format("can't find post with UID: %s", ex.getUid()))
 //        .build();
     return notFound().header("details", msg).build();

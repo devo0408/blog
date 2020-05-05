@@ -7,7 +7,6 @@ import lombok.Getter;
 @Getter
 public class PostDto {
 
-
   private final String uid;
   private final String topic;
   private final String text;

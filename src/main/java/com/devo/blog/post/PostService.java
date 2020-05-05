@@ -11,7 +11,6 @@ public class PostService {
 
   private final PostRepository postRepository;
 
-
   public PostEntity getByUid(String uid){
     return postRepository.findPostEntityByUid(uid).orElse(null);
   }

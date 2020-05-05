@@ -28,17 +28,10 @@ public class PostsController {
 
   @GetMapping(value = "/{uid}")
   public ResponseEntity<PostDto> getPost(@PathVariable("uid") String uid){
-
     return Optional.ofNullable(postService.getByUid(uid))
         .map(postDtoConverter::convert)
         .map(postDto -> ok().body(postDto))
-        .orElseThrow(() -> new PostNotFoundException(uid));
-
-//    PostEntity postEntity = postService.getByUid(uid);
-//    if (postEntity == null) {
-//       throw new PostNotFoundException();
-//    }
-//    return ok(postDtoConverter.convert(postEntity));
+        .orElseGet(() -> notFound().build());
   }
 
 }
