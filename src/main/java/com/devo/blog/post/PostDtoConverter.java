@@ -4,10 +4,11 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PostDtoConverter implements Converter<Post, PostDto> {
+public class PostDtoConverter implements Converter<PostEntity, PostDto> {
+
 
   @Override
-  public PostDto convert(Post source) {
+  public PostDto convert(PostEntity source) {
     return PostDto.builder()
         .uid(source.getUid())
         .topic(source.getTopic())
