@@ -13,7 +13,7 @@ import static java.lang.String.format;
 public class BlogResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(PostNotFoundException.class)
-  protected ResponseEntity<RestErrorMessage> handleConflict(PostNotFoundException ex) {
+  protected ResponseEntity<ResponseMessage> handleConflict(PostNotFoundException ex) {
     String msg = format("can't find post with UID: %s", ex.getUid());
 //    RestErrorMessage msgDto = RestErrorMessage.builder()
 //        .message(format("can't find post with UID: %s", ex.getUid()))
