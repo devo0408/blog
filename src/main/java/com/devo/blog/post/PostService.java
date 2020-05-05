@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.devo.blog.common.utils.IdentifierGenerator.getNextPostUid;
+
 
 @Service
 @AllArgsConstructor
@@ -29,7 +31,8 @@ public class PostService {
   }
 
   private void updatePostEntity(PostEntity postEntity, PostDto postDto){
-    postEntity.setUid(postDto.getUid());
+    String uid = postDto.getUid() != null ? postDto.getUid() : getNextPostUid();
+    postEntity.setUid(uid);
     postEntity.setTopic(postDto.getTopic());
     postEntity.setText(postDto.getText());
   }

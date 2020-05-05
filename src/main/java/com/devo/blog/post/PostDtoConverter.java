@@ -8,10 +8,6 @@ public class PostDtoConverter implements Converter<PostEntity, PostDto> {
 
   @Override
   public PostDto convert(PostEntity source) {
-    return PostDto.builder()
-        .uid(source.getUid())
-        .topic(source.getTopic())
-        .text(source.getText())
-        .build();
+    return new PostDto(source.getUid(), source.getTopic(), source.getText());
   }
 }

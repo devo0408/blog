@@ -24,4 +24,5 @@ public class PostEntity {
   private String topic;
   @Column
   private String text;
+  // TODO: 05.05.2020 add Created/Updated date
 }

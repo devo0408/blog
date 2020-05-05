@@ -1,4 +1,3 @@
-#spring
 spring:
   profiles:
     active: dev1

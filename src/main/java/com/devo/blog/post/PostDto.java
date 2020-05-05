@@ -1,14 +1,18 @@
 package com.devo.blog.post;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Builder
+@Setter
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostDto {
-  // TODO: 05.05.2020 add Created/Updated date
-  private final String uid;
-  private final String topic;
-  private final String text;
+
+  private String uid;
+  private String topic;
+  private String text;
 
 }

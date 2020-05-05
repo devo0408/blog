@@ -1,4 +1,4 @@
-package com.devo.blog.web.validation;
+package com.devo.blog.web;
 
 import lombok.Builder;
 import lombok.Getter;
