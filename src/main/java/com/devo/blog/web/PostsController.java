@@ -30,9 +30,9 @@ public class PostsController {
   public ResponseEntity<PostDto> getPost(@PathVariable("uid") String uid){
 
     return Optional.ofNullable(postService.getByUid(uid))
-        .map(post -> postDtoConverter.convert(post))
-        .map(postDto -> ok().body(postDto))          //200 OK
-        .orElseGet(() -> notFound().build());
+        .map(postDtoConverter::convert)
+        .map(postDto -> ok().body(postDto))
+        .orElseThrow(() -> new PostNotFoundException(uid));
 
 //    PostEntity postEntity = postService.getByUid(uid);
 //    if (postEntity == null) {

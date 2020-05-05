@@ -7,16 +7,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import static org.springframework.http.ResponseEntity.notFound;
+import static java.lang.String.format;
 
 @ControllerAdvice
 public class BlogResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(PostNotFoundException.class)
-  protected ResponseEntity<RestErrorMessage> handleConflict() {
-//    RestErrorMessage msg = RestErrorMessage.builder()
+  protected ResponseEntity<RestErrorMessage> handleConflict(PostNotFoundException ex) {
+    String msg = format("can't find post with UID: %s", ex.getUid());
+
+    //    RestErrorMessage msg = RestErrorMessage.builder()
 //        .message(format("can't find post with UID: %s", ex.getUid()))
 //        .build();
-    return notFound().build();
+    return notFound().header("details", msg).build();
   }
 
 }
