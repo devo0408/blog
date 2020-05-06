@@ -7,8 +7,10 @@ import com.devo.blog.post.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +31,7 @@ public class PostsController {
   private final PostService postService;
 
 
-  @GetMapping(value = "/")
+  @GetMapping
   public ResponseEntity<List<PostDto>> getAllPost(){
     List<PostDto> posts = postService.findAll().stream()
         .map(postDtoConverter::convert)
@@ -45,11 +47,11 @@ public class PostsController {
         .orElseGet(() -> notFound().build());
   }
 
-  @PostMapping(value = "/")
-  public ResponseEntity<ResponseMessage> createPost(PostDto inputPost){
+  @PostMapping
+  public ResponseEntity<ResponseMessage> createPost(@RequestBody PostDto inputPost){
     // TODO: 05.05.2020 add header 'Location' = /posts/{uid},
     PostEntity createdPost = postService.create(inputPost);
-    ResponseMessage msg = ResponseMessage.of(format("Created new post %s", createdPost.getUid()));
+    ResponseMessage msg = ResponseMessage.of(format("Created new post: %s", createdPost.getUid()));
     return ok(msg);
   }
 
