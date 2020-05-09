@@ -1,4 +1,4 @@
-package com.devo.blog.exception;
+package com.devo.blog.post;
 
 import lombok.Getter;
 

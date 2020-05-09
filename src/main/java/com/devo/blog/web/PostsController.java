@@ -1,6 +1,6 @@
 package com.devo.blog.web;
 
-import com.devo.blog.exception.PostNotFoundException;
+import com.devo.blog.post.PostNotFoundException;
 import com.devo.blog.post.PostDto;
 import com.devo.blog.post.PostDtoConverter;
 import com.devo.blog.post.PostEntity;
@@ -65,7 +65,7 @@ public class PostsController {
     return ok(ResponseMessage.of(format("uid: %s", newUid)));
   }
 
-  @PutMapping
+  @PutMapping(value = "/{uid}")
   public ResponseEntity<ResponseMessage> updatePost(@PathVariable("uid") String uid,
                                                     @Valid @RequestBody PostDto newPostData){
     log.info("Start updating post \"{}\" from \" {}\"", uid, newPostData);
@@ -83,7 +83,7 @@ public class PostsController {
   }
 
 
-  @DeleteMapping
+  @DeleteMapping(value = "/{uid}")
   public ResponseEntity<ResponseMessage> deletePost(@PathVariable("uid") String uid){
     log.info("Start deleting post {}", uid);
 

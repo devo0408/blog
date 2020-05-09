@@ -1,6 +1,6 @@
 package com.devo.blog.web.validation;
 
-import com.devo.blog.exception.PostNotFoundException;
+import com.devo.blog.post.PostNotFoundException;
 import com.devo.blog.web.ResponseMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
