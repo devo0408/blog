@@ -40,7 +40,7 @@ public class PostService {
   }
 
   private void updatePostEntity(PostEntity postEntity, PostDto postDto){
-    String uid = postDto.getUid() != null ? postDto.getUid() : getNextPostUid();
+    String uid = postEntity.getUid() != null ? postEntity.getUid() : getNextPostUid();
     postEntity.setUid(uid);
     postEntity.setTopic(postDto.getTopic());
     postEntity.setText(postDto.getText());
