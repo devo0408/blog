@@ -35,6 +35,10 @@ public class PostService {
     return postRepository.save(post);
   }
 
+  public void delete(PostEntity post) {
+    postRepository.deleteById(post.getId());
+  }
+
   private void updatePostEntity(PostEntity postEntity, PostDto postDto){
     String uid = postDto.getUid() != null ? postDto.getUid() : getNextPostUid();
     postEntity.setUid(uid);

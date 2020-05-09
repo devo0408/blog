@@ -8,6 +8,7 @@ import com.devo.blog.post.PostService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,16 +70,33 @@ public class PostsController {
                                                     @Valid @RequestBody PostDto newPostData){
     log.info("Start updating post \"{}\" from \" {}\"", uid, newPostData);
 
-    PostEntity currentStatePost = postService.findByUid(uid);
+    PostEntity postToUpdate = postService.findByUid(uid);
 
     Function<PostEntity, ResponseEntity<ResponseMessage>> postResponseCreator = (postEntity) -> {
       log.info("Post {} successfully updated", postEntity.getUid());
       return ok(ResponseMessage.of("Successfully updated"));
     };
-    return Optional.ofNullable(currentStatePost)
+    return Optional.ofNullable(postToUpdate)
         .map(postEntity -> postService.update(postEntity, newPostData))
         .map(postResponseCreator)
         .orElseThrow(() -> new PostNotFoundException(uid));
   }
 
+
+  @DeleteMapping
+  public ResponseEntity<ResponseMessage> deletePost(@PathVariable("uid") String uid){
+    log.info("Start deleting post {}", uid);
+
+    PostEntity postToDelete = postService.findByUid(uid);
+
+    Function<PostEntity, ResponseEntity<ResponseMessage>> postResponseCreator = (postEntity) -> {
+      postService.delete(postEntity);
+      log.info("Post {} successfully deleted", postEntity.getUid());
+      return ok(ResponseMessage.of("Successfully deleted"));
+    };
+
+    return Optional.ofNullable(postToDelete)
+        .map(postResponseCreator)
+        .orElseThrow(() -> new PostNotFoundException(uid));
+  }
 }
