@@ -1,14 +1,13 @@
 package com.devo.blog.web;
 
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Value;
 
-@Getter
+@Value
 @Builder
 public class ResponseMessage {
 
-  private final String message;
-
+  String message;
 
   public static ResponseMessage of(String msg){
     return ResponseMessage.builder()

@@ -30,6 +30,11 @@ public class PostService {
     return postRepository.save(post);
   }
 
+  public PostEntity update(PostEntity post, PostDto postDto){
+    updatePostEntity(post, postDto);
+    return postRepository.save(post);
+  }
+
   private void updatePostEntity(PostEntity postEntity, PostDto postDto){
     String uid = postDto.getUid() != null ? postDto.getUid() : getNextPostUid();
     postEntity.setUid(uid);
